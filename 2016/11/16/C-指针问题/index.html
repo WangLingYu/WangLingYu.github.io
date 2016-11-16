@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>C++指针问题 | Coder的自由空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="////  C++Function.cpp//  C++Shortage////  Created by Coder on 2016/11/15.//  Copyright © 2016年 王苓宇. All rights reserved.///下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++指针问题">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/C-指针问题/index.html">
+<meta property="og:site_name" content="Coder的自由空间">
+<meta property="og:description" content="////  C++Function.cpp//  C++Shortage////  Created by Coder on 2016/11/15.//  Copyright © 2016年 王苓宇. All rights reserved.///下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误/">
+<meta property="og:updated_time" content="2016-11-16T15:41:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++指针问题">
+<meta name="twitter:description" content="////  C++Function.cpp//  C++Shortage////  Created by Coder on 2016/11/15.//  Copyright © 2016年 王苓宇. All rights reserved.///下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误/">
+  
+    <link rel="alternative" href="/atom.xml" title="Coder的自由空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王晨</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">王晨</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="null" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王晨</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-C-指针问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++指针问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>//<br>//  C++Function.cpp<br>//  C++Shortage<br>//<br>//  Created by Coder on 2016/11/15.<br>//  Copyright © 2016年 王苓宇. All rights reserved.<br>//<br>/<em>下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误</em>/<br><a id="more"></a></p>
+<p>#include <iostream></iostream></p>
+<p>using namespace std;</p>
+<p>class Test {<br>public:<br>string name;<br>};</p>
+<p>//首先声明，函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</p>
+<p>//该函数编号为函数1，无法和fun(Test &amp;test)共存，因为这样main函数中调用fun(test)无法识别改调用该函数还是fun(Test &amp;test)<br>//void fun(Test test) {<br>//    cout &lt;&lt; “fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的值并不是外面test的地址，说明此时改变test不会同步改变外部test的值<br>//    //解释 函数会在该函数的作用域内临时生成一个对象，将外界test函数的值全部复制给自己，在fun函数结束后自身被析构掉,被销毁，但是外界的test对象地址值没有收到改变，因此值不变<br>//    // （自己暂时留坑，今后再验证，考虑如果对象里面有指针成员，会不会临时变量和外界对象会不会指向同一个地方）<br>//    test.name = “test函数”;<br>//}</p>
+<p>//该函数编号为函数2，当main函数中调用的是fun(p),或者fun(&amp;test)时会调用该函数<br>void fun(Test <em>test) {<br>cout &lt;&lt; “fun(Test </em>test)函数中test的值” &lt;&lt; test &lt;&lt; endl;//通过打印得到test的值也就是外面test的地址，说明此时改变<em>test也在同步改变外部test的值<br>test-&gt;name = “</em>test函数”;<br>}</p>
+<p>//该函数编号为函数3，我尝试重写fun函数只是参数不同，但是调用时每次都调用的都是fun(Test *test),可能是main函数传入的指针匹配不了fun(Test 7test)函数,除非main函数中调用时传入的是test,此时也是传入main函数中test的自身地址，所以修改test的值也会同步修改外界test的值<br>//void fun(Test &amp;test) {<br>//    cout &lt;&lt; “fun(Test &amp;test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test也是外部test的地址,此时test不是指针，直接修改test就会同步修改外部a的值<br>//    test.name = “&amp;test函数”;<br>//}</p>
+<p>//该函数编号为函数4，测试发现&amp;fun(Test &amp;test)结果也是相同的，只不过如果参数是&amp;test，那么传入的test的值也会同步变化<br>//Test &amp;fun(Test test) {<br>//    cout &lt;&lt; “&amp;fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的地址,test是一个临时变量<br>//    test.name = “&amp;fun(Test test)”;<br>//    return test;<br>//}</p>
+<p>//返回一个指针，指针的值为test的地址<br>Test <em>fun(Test test) {<br>cout &lt;&lt; “</em>fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的地址,test是一个临时变量<br>test.name = “*fun(Test test)”;<br>return &test;<br>}</p>
+<p>int main() {</p>
+<p>Test <em>p;<br>Test test;<br>p = &test;<br>cout &lt;&lt; “p的值为(也就是test的地址值):” &lt;&lt; p &lt;&lt; endl &lt;&lt; endl;<br>fun(p);//此时是把p地址上的内容，也就是a的地址传入<br>cout &lt;&lt; “调用fun(Test </em>test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>fun(&amp;test);//传入test自身的地址，实际上就是p的内容，和fun(p)效果一样<br>cout &lt;&lt; “调用fun(Test *test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>//    fun(test);<br>//    cout &lt;&lt; “调用fun(Test &amp;test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>//    fun(test);<br>//    cout &lt;&lt; “调用fun(Test test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;<br>//<br>//    Test test1 = fun(test);<br>//    cout &lt;&lt; “调用&amp;fun(Test test)后test1的地址值为：” &lt;&lt; &amp;test1 &lt;&lt; endl;<br>//    cout &lt;&lt; “调用&amp;fun(Test test)后test1.name的值为：” &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>Test test1 = <em>fun(test); //用于调用</em>fun(Test test);<br>cout &lt;&lt; “调用<em>fun(Test test)后test1的地址值为：” &lt;&lt; &amp;test1 &lt;&lt; endl;<br>cout &lt;&lt; “调用</em>fun(Test test)后test1.name的值为：” &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>return 0;<br>}</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/16/C-指针问题/" class="archive-article-date">
+  	<time datetime="2016-11-16T15:24:39.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-16</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/16/First/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">First Night</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王晨
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
