@@ -11,8 +11,10 @@
   <meta name="description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
 本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误
 
-#include using namespace std;class Test {public:string name;};
-首先声明，下文中的函数1，3，4在">
+#include &amp;lt;iostream&amp;gt;using namespace std;
+class Test {  
+public:
+string name">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++指针问题">
 <meta property="og:url" content="http://yoursite.com/2016/11/16/C-指针问题/index.html">
@@ -20,16 +22,20 @@
 <meta property="og:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
 本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误
 
-#include using namespace std;class Test {public:string name;};
-首先声明，下文中的函数1，3，4在">
-<meta property="og:updated_time" content="2016-11-16T16:29:58.000Z">
+#include &amp;lt;iostream&amp;gt;using namespace std;
+class Test {  
+public:
+string name">
+<meta property="og:updated_time" content="2016-11-16T16:33:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++指针问题">
 <meta name="twitter:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
 本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误
 
-#include using namespace std;class Test {public:string name;};
-首先声明，下文中的函数1，3，4在">
+#include &amp;lt;iostream&amp;gt;using namespace std;
+class Test {  
+public:
+string name">
   
     <link rel="alternative" href="/atom.xml" title="Coder的自由空间" type="application/atom+xml">
   
@@ -174,17 +180,49 @@
         <h1 id="Created-by-Coder-on-2016-11-15"><a href="#Created-by-Coder-on-2016-11-15" class="headerlink" title="Created by Coder on 2016/11/15."></a>Created by Coder on 2016/11/15.</h1><h1 id="C-各种不同类型函数调用以及相应操作效果"><a href="#C-各种不同类型函数调用以及相应操作效果" class="headerlink" title="C++各种不同类型函数调用以及相应操作效果"></a>C++各种不同类型函数调用以及相应操作效果</h1><blockquote>
 <p>本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误</p>
 </blockquote>
-<p>#include <iostream>using namespace std;<br>class Test {<br>public:<br>string name;<br>};</iostream></p>
-<p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em>  </p>
+<pre><code>#include &lt;iostream&gt;using namespace std;
+class Test {  
+public:
+string name;
+};
+</code></pre><p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em>  </p>
 <p>######该函数编号为函数1，无法和fun(Test &amp;test)共存，因为main函数中调用fun(test)无法识别改调用该函数还是fun(Test &amp;test)    </p>
-<p>//void fun(Test test) {<br>//   cout &lt;&lt; “fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的值并不是外面test的地址，说明此时改变test不会同步改变外部test的值<br>//解释 函数会在该函数的作用域内临时生成一个对象，将外界test函数的值全部复制给自己，在fun函数结束后自身被析构掉,被销毁，但是外界的test对象地址值没有收到改变，因此值不变<br>// （自己暂时留坑，今后再验证，考虑如果对象里面有指针成员，会不会临时变量和外界对象会不会指向同一个地方）<br>test.name = “test函数”;<br>}</p>
-<p>######该函数编号为函数2，当main函数中调用的是fun(p),或者fun(&amp;test)时会调用该函数<br>void fun(Test <em>test) {<br>cout &lt;&lt; “fun(Test </em>test)函数中test的值” &lt;&lt; test &lt;&lt; endl;//通过打印得到test的值也就是外面test的地址，说明此时改变<em>test也在同步改变外部test的值<br>test-&gt;name = “</em>test函数”;<br>}</p>
+<pre><code>//void fun(Test test) {
+//   cout &lt;&lt; &quot;fun(Test test)函数中test的值&quot; &lt;&lt; &amp;test &lt;&lt; endl;//    通过打印得到test的值并不是外面test的地址，说明此时改变test不会同步改变外部test的值
+//解释 函数会在该函数的作用域内临时生成一个对象，将外界test函数的值全部复制给自己，在fun函数    结束后自身被析构掉,被销毁，但是外界的test对象地址值没有收到改变，因此值不变
+// （自己暂时留坑，今后再验证，考虑如果对象里面有指针成员，会不会临时变量和外界对象会不会指向    同一个地方）
+test.name = &quot;test函数&quot;;
+}
+</code></pre><p>######该函数编号为函数2，当main函数中调用的是fun(p),或者fun(&amp;test)时会调用该函数<br>    void fun(Test <em>test) {<br>    cout &lt;&lt; “fun(Test </em>test)函数中test的值” &lt;&lt; test &lt;&lt; endl;//    通过打印得到test的值也就是外面test的地址，说明此时改变<em>test也在同步改变外部test的值<br>    test-&gt;name = “</em>test函数”;<br>    }</p>
 <p>######该函数编号为函数3，我尝试重写fun函数只是参数不同，但是调用时每次都调用的都是fun(Test *test),可能是main函数传入的指针匹配不了fun(Test 7test)函数,除非main函数中调用时传入的是test,此时也是传入main函数中test的自身地址，所以修改test的值也会同步修改外界test的值</p>
-<p>//void fun(Test &amp;test) {<br>//    cout &lt;&lt; “fun(Test &amp;test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test也是外部test的地址,此时                            test不是指针，直接修改test就会同步修改外部a的值<br>//    test.name = “&amp;test函数”;<br>//}</p>
-<p>######该函数编号为函数4，测试发现&amp;fun(Test &amp;test)结果也是相同的，只不过如果参数是&amp;test，那么传入的test的值也会同步变化<br>//Test &amp;fun(Test test) {<br>//    cout &lt;&lt; “&amp;fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;<br>//通过打印得到test的地址,test是一个临时变量<br>//    test.name = “&amp;fun(Test test)”;<br>//    return test;<br>//}</p>
-<p>######返回一个指针，指针的值为test的地址<br>Test <em>fun(Test test) {<br>cout &lt;&lt; “</em>fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的地址,test是一个临时变量<br>test.name = “*fun(Test test)”;<br>return &test;<br>}</p>
-<p>int main() {<br>Test <em>p;<br>Test test;<br>p = &test;<br>cout &lt;&lt; “p的值为(也就是test的地址值):” &lt;&lt; p &lt;&lt; endl &lt;&lt; endl;<br>fun(p);//此时是把p地址上的内容，也就是a的地址传入<br>cout &lt;&lt; “调用fun(Test </em>test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;<br>fun(&amp;test);//传入test自身的地址，实际上就是p的内容，和fun(p)效果一样<br>cout &lt;&lt; “调用fun(Test <em>test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;//    fun(test);<br>//    cout &lt;&lt; “调用fun(Test &amp;test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;<br>//    fun(test);<br>//    cout &lt;&lt; “调用fun(Test test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;<br>//    Test test1 = fun(test);<br>//    cout &lt;&lt; “调用&amp;fun(Test test)后test1的地址值为：” &lt;&lt; &amp;test1 &lt;&lt; endl;<br>//    cout &lt;&lt; “调用&amp;fun(Test test)后test1.name的值为：” &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;<br>Test test1 = </em>fun(test);<br>//用于调用<em>fun(Test test);<br>cout &lt;&lt; “调用</em>fun(Test test)后test1的地址值为：” &lt;&lt; &amp;test1 &lt;&lt; endl;<br>cout &lt;&lt; “调用*fun(Test test)后test1.name的值为：” &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;<br>return 0;<br>}</p>
-
+<pre><code>//void fun(Test &amp;test) {  
+//    cout &lt;&lt; &quot;fun(Test &amp;test)函数中test的值&quot; &lt;&lt; &amp;test &lt;&lt; endl;//    通过打印得到test也是外部test的地址,此时                                test不是指针，直接修改test就会同步修改外部a的值
+//    test.name = &quot;&amp;test函数&quot;;
+//}
+</code></pre><p>######该函数编号为函数4，测试发现&amp;fun(Test &amp;test)结果也是相同的，只不过如果参数是&amp;test，那么传入的test的值也会同步变化<br>    //Test &amp;fun(Test test) {<br>    //    cout &lt;&lt; “&amp;fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;<br>    //通过打印得到test的地址,test是一个临时变量<br>    //    test.name = “&amp;fun(Test test)”;<br>    //    return test;<br>    //}</p>
+<p>######返回一个指针，指针的值为test的地址<br>    Test <em>fun(Test test) {<br>    cout &lt;&lt; “</em>fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//    通过打印得到test的地址,test是一个临时变量<br>    test.name = “*fun(Test test)”;<br>    return &test;<br>    }</p>
+<pre><code>int main() {
+Test *p;
+Test test;
+p = &amp;test;
+cout &lt;&lt; &quot;p的值为(也就是test的地址值):&quot; &lt;&lt; p &lt;&lt; endl &lt;&lt; endl;
+fun(p);//此时是把p地址上的内容，也就是a的地址传入
+cout &lt;&lt; &quot;调用fun(Test *test)后test.name的值为：&quot; &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;
+fun(&amp;test);//传入test自身的地址，实际上就是p的内容，和fun(p)效果一样
+cout &lt;&lt; &quot;调用fun(Test *test)后test.name的值为：&quot; &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;//        fun(test);
+//    cout &lt;&lt; &quot;调用fun(Test &amp;test)后test.name的值为：&quot; &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;
+//    fun(test);
+//    cout &lt;&lt; &quot;调用fun(Test test)后test.name的值为：&quot; &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;
+//    Test test1 = fun(test);
+//    cout &lt;&lt; &quot;调用&amp;fun(Test test)后test1的地址值为：&quot; &lt;&lt; &amp;test1 &lt;&lt; endl;
+//    cout &lt;&lt; &quot;调用&amp;fun(Test test)后test1.name的值为：&quot; &lt;&lt; test1.name &lt;&lt; endl &lt;&lt;     endl;
+Test test1 = *fun(test);
+//用于调用*fun(Test test);
+cout &lt;&lt; &quot;调用*fun(Test test)后test1的地址值为：&quot; &lt;&lt; &amp;test1 &lt;&lt; endl;
+cout &lt;&lt; &quot;调用*fun(Test test)后test1.name的值为：&quot; &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;
+return 0;
+}
+</code></pre>
       
     </div>
     <div class="article-info article-info-index">
