@@ -9,33 +9,18 @@
   <title>C++指针问题 | Coder的自由空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
-本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误
-
-#include &amp;lt;iostream&amp;gt;using namespace std;
-class Test {  
-public:
-string name">
+本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++指针问题">
 <meta property="og:url" content="http://yoursite.com/2016/11/16/C-指针问题/index.html">
 <meta property="og:site_name" content="Coder的自由空间">
 <meta property="og:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
-本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误
-
-#include &amp;lt;iostream&amp;gt;using namespace std;
-class Test {  
-public:
-string name">
-<meta property="og:updated_time" content="2016-11-16T16:33:17.000Z">
+本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误">
+<meta property="og:updated_time" content="2016-11-16T16:35:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++指针问题">
 <meta name="twitter:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
-本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误
-
-#include &amp;lt;iostream&amp;gt;using namespace std;
-class Test {  
-public:
-string name">
+本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误">
   
     <link rel="alternative" href="/atom.xml" title="Coder的自由空间" type="application/atom+xml">
   
@@ -178,14 +163,14 @@ string name">
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Created-by-Coder-on-2016-11-15"><a href="#Created-by-Coder-on-2016-11-15" class="headerlink" title="Created by Coder on 2016/11/15."></a>Created by Coder on 2016/11/15.</h1><h1 id="C-各种不同类型函数调用以及相应操作效果"><a href="#C-各种不同类型函数调用以及相应操作效果" class="headerlink" title="C++各种不同类型函数调用以及相应操作效果"></a>C++各种不同类型函数调用以及相应操作效果</h1><blockquote>
-<p>本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误</p>
-</blockquote>
+<p>本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误<br><a id="more"></a></p>
 <pre><code>#include &lt;iostream&gt;using namespace std;
 class Test {  
 public:
 string name;
 };
-</code></pre><p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em>  </p>
+</code></pre></blockquote>
+<p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em>  </p>
 <p>######该函数编号为函数1，无法和fun(Test &amp;test)共存，因为main函数中调用fun(test)无法识别改调用该函数还是fun(Test &amp;test)    </p>
 <pre><code>//void fun(Test test) {
 //   cout &lt;&lt; &quot;fun(Test test)函数中test的值&quot; &lt;&lt; &amp;test &lt;&lt; endl;//    通过打印得到test的值并不是外面test的地址，说明此时改变test不会同步改变外部test的值
