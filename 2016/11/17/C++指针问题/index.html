@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Coder的自由空间">
 <meta property="og:description" content="Created by 王晨 on 16/6/20.
 说明，此代码由浅入深，同时可能解说思想有所不同，让人觉得怪异，但是个人认为这种思想有助于理解C，C++实质性的东西。下面基本涵盖了C语言和C++的简单指针部分，同时也简单介绍了C++特有的引用。">
-<meta property="og:updated_time" content="2016-11-16T16:51:31.000Z">
+<meta property="og:updated_time" content="2016-11-16T16:58:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coder的自由空间">
 <meta name="twitter:description" content="Created by 王晨 on 16/6/20.
@@ -165,11 +165,11 @@ int main() {
 int *p;
 int *q;
 </code></pre><blockquote>
-<p>这里<em>p,</em>q并不是指取得p地址上储存的值,而是另一种用法，用于声明p,q是一个指针，实际上<em><br>是与int放在一起的， 是int</em> p , int* q;</p>
+<p>这里<em>p,</em>q并不是指取得p地址上储存的值,而是另一种用法，用于声明p,q是一个指针，实际上<em><br>是与int放在一起的，是int</em> p , int* q;</p>
 </blockquote>
 <pre><code>int a = 6;
 p = &amp;a;
-cout &lt;&lt; &quot;    &quot;&lt;&lt;&amp;*p&lt;&lt;endl;
+cout &lt;&lt; &quot;先取p存的值(也就是a的地址值),再*p取得a地址上存的值(也就是6)，再&amp;(*p)(也就是取存6这个值的地址),其实就是a自身的地址&quot;&lt;&lt;&amp;*p&lt;&lt;endl;
 cout &lt;&lt; &quot;a自身的地址为:&quot; &lt;&lt; &amp;a &lt;&lt; endl;
 cout &lt;&lt; &quot;a的值,也就是a的地址所储存的值为:&quot; &lt;&lt; a &lt;&lt;  endl;
 cout &lt;&lt; &quot;p自身的地址为:&quot; &lt;&lt; &amp;p &lt;&lt; endl;
@@ -185,12 +185,12 @@ cout &lt;&lt;&quot;令a = 7,当a的值改变过后&quot;&lt;&lt;endl;
 cout &lt;&lt; &quot;*p,也就是p自身地址所储存的值（也就是a的自身地址）所储存的值为:&quot; &lt;&lt; *p &lt;&lt; endl;
 cout &lt;&lt; &quot;*q,也就是q自身地址所储存的值（也就是a的地址）所储存的值为:&quot; &lt;&lt; *q &lt;&lt; endl;
 cout &lt;&lt; &quot;a的值,也就是a自身地址所储存的值为:&quot;  &lt;&lt; a &lt;&lt; &quot;\n\n\n&quot;;  
-</code></pre><h3 id="q-p-的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址-所以此时q也指向a，所以此时改变a的值，那么q和p所代表的值都会变化"><a href="#q-p-的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址-所以此时q也指向a，所以此时改变a的值，那么q和p所代表的值都会变化" class="headerlink" title="q =p 的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址,所以此时q也指向a，所以此时改变a的值，那么q和p所代表的值都会变化"></a>q =p 的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址,所以此时q也指向a，所以此时改变a的值，那么<em>q和</em>p所代表的值都会变化</h3><pre><code>cout &lt;&lt; &quot;测试在其他函数中对指针进行处理后的变化&quot;&lt;&lt;endl;
+</code></pre><h3 id="q-p-的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址-所以此时q也指向a，所以此时改变a的值，那么q和-p所代表的值都会变化"><a href="#q-p-的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址-所以此时q也指向a，所以此时改变a的值，那么q和-p所代表的值都会变化" class="headerlink" title="q =p 的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址,所以此时q也指向a，所以此时改变a的值，那么q和*p所代表的值都会变化"></a>q =p 的实质就是将p地址上储存的值（也就是a的地址）赋予给q，这样q的地址所储存的值就是a的地址,所以此时q也指向a，所以此时改变a的值，那么<em>q和*</em>p所代表的值都会变化</h3><pre><code>cout &lt;&lt; &quot;测试在其他函数中对指针进行处理后的变化&quot;&lt;&lt;endl;
 isChangePtr(p);
 cout &lt;&lt; &quot;p自身的地址为:&quot; &lt;&lt; &amp;p &lt;&lt; &quot;\n&quot;;
 cout &lt;&lt; &quot;p的值，也就是p自身地址所储存的值（也就是a自身的地址）为:&quot; &lt;&lt; p &lt;&lt; &quot;\n&quot;;
 cout &lt;&lt; &quot;*p,也就是p自身地址所储存的值（也就是a的自身地址）所储存的值为:&quot;&lt;&lt; *p &lt;&lt; &quot;\n\n\n&quot;;
-</code></pre><h3 id="总结：在C语言中若函数形参是void-isChangePtr-int-n-也就是n-p"><a href="#总结：在C语言中若函数形参是void-isChangePtr-int-n-也就是n-p" class="headerlink" title="总结：在C语言中若函数形参是void isChangePtr(int n) ,也就是n = p;"></a>总结：在C语言中若函数形参是void isChangePtr(int <em>n) ,也就是</em>n = p;</h3><p>###这只是把p地址储存的值（也就是a的地址赋予给n），那么函数中对n进行操作，也相当于对a进行操作，例如如果在函数中把a的值改为8，那么在函数外*p的值也会改变为8,但是这样并没有对p进行任何操作，那么假设若在函数中让n不指向a，让n指向b，但是对函数外的p指针没有任何影响，p指针还是指向a</p>
+</code></pre><h3 id="总结：在C语言中若函数形参是void-isChangePtr-int-n-也就是-n-p"><a href="#总结：在C语言中若函数形参是void-isChangePtr-int-n-也就是-n-p" class="headerlink" title="总结：在C语言中若函数形参是void isChangePtr(int n) ,也就是*n = p;"></a>总结：在C语言中若函数形参是void isChangePtr(int <em>n) ,也就是*</em>n = p;</h3><p>###这只是把p地址储存的值（也就是a的地址赋予给n），那么函数中对n进行操作，也相当于对a进行操作，例如如果在函数中把a的值改为8，那么在函数外*p的值也会改变为8,但是这样并没有对p进行任何操作，那么假设若在函数中让n不指向a，让n指向b，但是对函数外的p指针没有任何影响，p指针还是指向a</p>
 <p>##//测试指向指针的指针<br>    cout &lt;&lt; “测试指向指针的指针” &lt;&lt; endl;<br>    int <em>n;<br>    int b = 5;<br>    n = &b;<br>    int **m;<br>    m  = &n;<br>    cout &lt;&lt; “b的值为：” &lt;&lt; b&lt;&lt;endl;<br>    cout &lt;&lt; “&amp;b的值为，也就是b自身地址为：” &lt;&lt; &amp;b&lt;&lt;endl;<br>    cout &lt;&lt; “&amp;n的值为，也就是n自身地址为：” &lt;&lt; &amp;n &lt;&lt;endl;<br>    cout &lt;&lt;”n的值为，也就是n自身地址上储存的值（也就是b的地址）的地址为：” &lt;&lt; n &lt;&lt; endl;<br>    cout &lt;&lt;”</em>n的值为，也就是n自身地址上储存的值（也就是b的地址）所储存的值为：” &lt;&lt; <em>n &lt;&lt; endl;<br>    cout &lt;&lt;”&amp;m的值为，也就是m自身的地址为：” &lt;&lt; &amp;m &lt;&lt; endl;<br>    cout &lt;&lt;”m的值为，也就是m自身地址上储存的地址（也就是n的地址）为：” &lt;&lt; m &lt;&lt; endl;<br>    cout &lt;&lt;”</em>m的值为,也就是m自身地址上储存的地址（也就是n的地址）上所储存的值（也就是b的地址）为：” &lt;&lt; <em>m &lt;&lt; endl;<br>    cout &lt;&lt;”<strong>m的值为,也就是m自身地址上储存的地址（也就是n的地址）上所储存的值（也就是b的地址）上所储存的值（也就是b代表的值）为” &lt;&lt; </strong>m &lt;&lt; endl;<br>    cout &lt;&lt; “</em>&amp;m的值为：（也就是n的地址）”&lt;&lt; *&amp;m&lt;&lt;endl;<br>    cout &lt;&lt; endl &lt;&lt; endl;</p>
 <p>###总结：所谓的指向指针的指针，也就是开辟新的区域来存放之前的指针，假设m是第二个指针，它指向第一个指针n,n指向一个int类型的值a。m代表的是m地址(m自身地址)上储存的地址(m储存的值，也就是n指针自身的地址)，<em>m代表的是取m地址(m自身地址)上存放的地址（m储存的值,也就是n指针自身的地址）上所储存的地址(也就是n指针地址储存的值,也就是a的地址，注意，是a的地址，而不是a的值)，*</em>m代表的是取m地址(m自身地址)上存放的地址（m储存的值,也就是n指针自身的地址）上所储存的地址(也就是n指针地址储存的值,就是a的地址，注意，是a的地址，而不是a的值)所储存的值（此时就是5）。希望读者能够自己自行进行理解，推荐用0，1，2，3，4的数字来代表各个变量的地址，进行手动画图的方式进行理解</p>
 <p>##//测试C++特有的引用<br>    int e = 5;<br>    int &amp;x = e;<br>    int &amp;y = x;<br>    cout &lt;&lt; “e的值为，也就是e自身地址上所储存的值为：”&lt;&lt;e&lt;&lt;endl;<br>    cout &lt;&lt; “&amp;e的值为，也就是e自身地址为：”&lt;&lt;&amp;e&lt;&lt;endl;<br>    cout &lt;&lt; “x的值为,也就是x自身地址所储存的值为：”&lt;&lt;x&lt;&lt;endl;<br>    cout &lt;&lt; “&amp;x的值为，也就是x自身的地址为：”&lt;&lt;&amp;x&lt;&lt;endl;<br>    cout &lt;&lt; “y的值为,也就是y自身地址所储存的值为：”&lt;&lt;y&lt;&lt;endl;<br>    cout &lt;&lt; “&amp;y的值为，也就是y自身地址为：”&lt;&lt;&amp;y&lt;&lt;endl;</p>
