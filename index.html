@@ -239,6 +239,139 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/C-指针问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="王晨">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coder的自由空间">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coder的自由空间" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/16/C-指针问题/" itemprop="url">
+                  C++指针问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-16T23:24:39+08:00">
+                2016-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>//<br>//  C++Function.cpp<br>//  C++Shortage<br>//<br>//  Created by Coder on 2016/11/15.<br>//  Copyright © 2016年 王苓宇. All rights reserved.<br>//<br>/<em>下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误</em>/</p>
+<p>#include <iostream></iostream></p>
+<p>using namespace std;</p>
+<p>class Test {<br>public:<br>string name;<br>};</p>
+<p>//首先声明，函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</p>
+<p>//该函数编号为函数1，无法和fun(Test &amp;test)共存，因为这样main函数中调用fun(test)无法识别改调用该函数还是fun(Test &amp;test)<br>//void fun(Test test) {<br>//    cout &lt;&lt; “fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的值并不是外面test的地址，说明此时改变test不会同步改变外部test的值<br>//    //解释 函数会在该函数的作用域内临时生成一个对象，将外界test函数的值全部复制给自己，在fun函数结束后自身被析构掉,被销毁，但是外界的test对象地址值没有收到改变，因此值不变<br>//    // （自己暂时留坑，今后再验证，考虑如果对象里面有指针成员，会不会临时变量和外界对象会不会指向同一个地方）<br>//    test.name = “test函数”;<br>//}</p>
+<p>//该函数编号为函数2，当main函数中调用的是fun(p),或者fun(&amp;test)时会调用该函数<br>void fun(Test <em>test) {<br>cout &lt;&lt; “fun(Test </em>test)函数中test的值” &lt;&lt; test &lt;&lt; endl;//通过打印得到test的值也就是外面test的地址，说明此时改变<em>test也在同步改变外部test的值<br>test-&gt;name = “</em>test函数”;<br>}</p>
+<p>//该函数编号为函数3，我尝试重写fun函数只是参数不同，但是调用时每次都调用的都是fun(Test *test),可能是main函数传入的指针匹配不了fun(Test 7test)函数,除非main函数中调用时传入的是test,此时也是传入main函数中test的自身地址，所以修改test的值也会同步修改外界test的值<br>//void fun(Test &amp;test) {<br>//    cout &lt;&lt; “fun(Test &amp;test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test也是外部test的地址,此时test不是指针，直接修改test就会同步修改外部a的值<br>//    test.name = “&amp;test函数”;<br>//}</p>
+<p>//该函数编号为函数4，测试发现&amp;fun(Test &amp;test)结果也是相同的，只不过如果参数是&amp;test，那么传入的test的值也会同步变化<br>//Test &amp;fun(Test test) {<br>//    cout &lt;&lt; “&amp;fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的地址,test是一个临时变量<br>//    test.name = “&amp;fun(Test test)”;<br>//    return test;<br>//}</p>
+<p>//返回一个指针，指针的值为test的地址<br>Test <em>fun(Test test) {<br>cout &lt;&lt; “</em>fun(Test test)函数中test的值” &lt;&lt; &amp;test &lt;&lt; endl;//通过打印得到test的地址,test是一个临时变量<br>test.name = “*fun(Test test)”;<br>return &test;<br>}</p>
+<p>int main() {</p>
+<p>Test <em>p;<br>Test test;<br>p = &test;<br>cout &lt;&lt; “p的值为(也就是test的地址值):” &lt;&lt; p &lt;&lt; endl &lt;&lt; endl;<br>fun(p);//此时是把p地址上的内容，也就是a的地址传入<br>cout &lt;&lt; “调用fun(Test </em>test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>fun(&amp;test);//传入test自身的地址，实际上就是p的内容，和fun(p)效果一样<br>cout &lt;&lt; “调用fun(Test *test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>//    fun(test);<br>//    cout &lt;&lt; “调用fun(Test &amp;test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>//    fun(test);<br>//    cout &lt;&lt; “调用fun(Test test)后test.name的值为：” &lt;&lt; p-&gt;name &lt;&lt; endl &lt;&lt; endl;<br>//<br>//    Test test1 = fun(test);<br>//    cout &lt;&lt; “调用&amp;fun(Test test)后test1的地址值为：” &lt;&lt; &amp;test1 &lt;&lt; endl;<br>//    cout &lt;&lt; “调用&amp;fun(Test test)后test1.name的值为：” &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>Test test1 = <em>fun(test); //用于调用</em>fun(Test test);<br>cout &lt;&lt; “调用<em>fun(Test test)后test1的地址值为：” &lt;&lt; &amp;test1 &lt;&lt; endl;<br>cout &lt;&lt; “调用</em>fun(Test test)后test1.name的值为：” &lt;&lt; test1.name &lt;&lt; endl &lt;&lt; endl;</p>
+<p>return 0;<br>}</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/First/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -320,131 +453,6 @@
             <blockquote>
 <p>我有一头<strong>小毛驴</strong>，可是我从来都不骑。</p>
 </blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/hello-world/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="王晨">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Coder的自由空间">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Coder的自由空间" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/16/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-16T22:38:17+08:00">
-                2016-11-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
           
         
