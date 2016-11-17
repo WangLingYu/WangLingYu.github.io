@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Coder的自由空间">
 <meta property="og:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
 本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误">
-<meta property="og:updated_time" content="2016-11-17T00:58:45.000Z">
+<meta property="og:updated_time" content="2016-11-17T01:58:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++函数问题">
 <meta name="twitter:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
@@ -150,15 +150,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Created-by-Coder-on-2016-11-15"><a href="#Created-by-Coder-on-2016-11-15" class="headerlink" title="Created by Coder on 2016/11/15."></a>Created by Coder on 2016/11/15.</h1><h1 id="C-各种不同类型函数调用以及相应操作效果"><a href="#C-各种不同类型函数调用以及相应操作效果" class="headerlink" title="C++各种不同类型函数调用以及相应操作效果"></a>C++各种不同类型函数调用以及相应操作效果</h1><blockquote>
-<p>本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误<br><a id="more"></a></p>
-<pre><code>#include &lt;iostream&gt;using namespace std;
-class Test {  
-public:
-string name;
-};
-</code></pre></blockquote>
-<p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em>  </p>
-<p>######该函数编号为函数1，无法和fun(Test &amp;test)共存，因为main函数中调用fun(test)无法识别改调用该函数还是fun(Test &amp;test)    </p>
+<p>本文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，作者能力有限，如有错误，希望读者能指出错误<br><a id="more"></a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">class</span> Test &#123;  </div><div class="line"><span class="keyword">public</span>:</div><div class="line"><span class="built_in">string</span> name;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em></p>
+<p>######该函数编号为函数1，无法和fun(Test &amp;test)共存，因为main函数中调用fun(test)无法识别改调用该函数还是fun(Test &amp;test)</p>
 <pre><code>//void fun(Test test) {
 //   cout &lt;&lt; &quot;fun(Test test)函数中test的值&quot; &lt;&lt; &amp;test &lt;&lt; endl;//    通过打印得到test的值并不是外面test的地址，说明此时改变test不会同步改变外部test的值
 //解释 函数会在该函数的作用域内临时生成一个对象，将外界test函数的值全部复制给自己，在fun函数    结束后自身被析构掉,被销毁，但是外界的test对象地址值没有收到改变，因此值不变
@@ -170,7 +165,7 @@ test.name = &quot;test函数&quot;;
 cout &lt;&lt; &quot;fun(Test *test)函数中test的值&quot; &lt;&lt; test &lt;&lt; endl;//    通过打印得到test的值也就是外面test的地址，说明此时改变*test也在同步改变外部test的值
 test-&gt;name = &quot;*test函数&quot;;
 }
-</code></pre><p>######该函数编号为函数3，我尝试重写fun函数只是参数不同，但是调用时每次都调用的都是fun(Test * test),可能是main函数传入的指针匹配不了fun(Test 7test)函数,除非main函数中调用时传入的是test,此时也是传入main函数中test的自身地址，所以修改test的值也会同步修改外界test的值  </p>
+</code></pre><p>######该函数编号为函数3，我尝试重写fun函数只是参数不同，但是调用时每次都调用的都是fun(Test *test),可能是main函数传入的指针匹配不了fun(Test &amp;test)函数,除非main函数中调用时传入的是test,此时也是传入main函数中test的自身地址，所以修改test的值也会同步修改外界test的值  </p>
 <pre><code>//void fun(Test &amp;test) {  
 //    cout &lt;&lt; &quot;fun(Test &amp;test)函数中test的值&quot; &lt;&lt; &amp;test &lt;&lt; endl;//    通过打印得到test也是外部test的地址,此时                                test不是指针，直接修改test就会同步修改外部a的值
 //    test.name = &quot;&amp;test函数&quot;;
@@ -235,9 +230,18 @@ return 0;
   
 <nav id="article-nav">
   
+    <a href="/2016/11/16/C++指针问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          C++指针问题
+        
+      </div>
+    </a>
   
-    <a href="/2016/11/16/C++指针问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++指针问题</div>
+  
+    <a href="/2016/11/16/First/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">First Night</div>
       <i class="icon-circle-right"></i>
     </a>
   
