@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Coder的自由空间">
 <meta property="og:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
 下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，其中用到了一些非常怪异的&amp;amp;*xxx用法，如果对指针不太了解，可以查看另一篇C++指针问题文章作者能力有限，如有错误，希望读者能指出错误">
-<meta property="og:updated_time" content="2016-11-17T14:29:26.000Z">
+<meta property="og:updated_time" content="2016-11-18T11:47:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++函数问题">
 <meta name="twitter:description" content="Created by Coder on 2016/11/15.C++各种不同类型函数调用以及相应操作效果
@@ -153,7 +153,7 @@
 <p>下文用代码来打印出对象内存地址来实际解释说明C++中各种函数调用的具体对象内存发生情况，<br>其中用到了一些非常怪异的&amp;*xxx用法，如果对指针不太了解，可以查看另一篇C++指针问题文章<br>作者能力有限，如有错误，希望读者能指出错误<br><a id="more"></a>  </p>
 </blockquote>
 <hr>
-<p><font color="red" size="4" face="黑体">(解释说明Again~~~)<br>目前为止函数5的&amp;fun(test)会报错，暂时未解决。<br>后期加入自定义类型中如果有指针成员变量，那么对象传入函数函数临时生成的对象会不会也指向原来内存区域。<br>再后期加入继承中父类通过指针调用子类和引用调用子类的区别。</font></p>
+<p><font color="red" size="4" face="黑体">(解释说明Again~~~)<br>目前为止函数5的&amp;fun(test)会报错，暂时未解决，猜测取一个函数的地址会出错。<br>后期加入自定义类型中如果有指针成员变量，那么对象传入函数函数临时生成的对象会不会也指向原来内存区域。<br>再后期加入继承中父类通过指针调用子类和引用调用子类的区别。</font></p>
 <hr>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </div><div class="line">		</div><div class="line"><span class="keyword">class</span> Test &#123;  </div><div class="line"><span class="keyword">public</span>:</div><div class="line">   <span class="built_in">string</span> name;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p><em>首先声明，下文中的函数1，3，4在调用fun(test)情况下无法共存，读者自己取消注释查看结果即可</em><br><em>函数4，5也无法共存</em></p>
