@@ -8,15 +8,29 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Coder的自由空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个有梦想潜心学习的Coder">
-<meta property="og:type" content="website">
+  <meta name="description" content="Android中View可以说是最为重要的几个地方之一，包括事件分发，测量，描绘等等，都是非常常见的情况。那么我们要想好好掌握这些知识，就得深入了解Andorid整个View从开始到完成所经历的一系列工作。
+##Activity和Window 在Android中，Activity并不负责视图控制，它只是控制生命周期和处理事件，真正控制视图的是Window。一个Activity包含了一个Window">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Coder的自由空间">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/初探Android的DecorView与Window/index.html">
 <meta property="og:site_name" content="Coder的自由空间">
-<meta property="og:description" content="一个有梦想潜心学习的Coder">
+<meta property="og:description" content="Android中View可以说是最为重要的几个地方之一，包括事件分发，测量，描绘等等，都是非常常见的情况。那么我们要想好好掌握这些知识，就得深入了解Andorid整个View从开始到完成所经历的一系列工作。
+##Activity和Window 在Android中，Activity并不负责视图控制，它只是控制生命周期和处理事件，真正控制视图的是Window。一个Activity包含了一个Window">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-9ebba23ce8392073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-866c643dd4b7f92d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-67c970873ef60c96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-da28f175ae8f7b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-9c7a487ccf7b1e88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-a9332a943063f985.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-8c9e67ae8b9b98bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-106a295d297c6e6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1202660-da28f175ae8f7b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-08-02T09:36:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coder的自由空间">
-<meta name="twitter:description" content="一个有梦想潜心学习的Coder">
+<meta name="twitter:description" content="Android中View可以说是最为重要的几个地方之一，包括事件分发，测量，描绘等等，都是非常常见的情况。那么我们要想好好掌握这些知识，就得深入了解Andorid整个View从开始到完成所经历的一系列工作。
+##Activity和Window 在Android中，Activity并不负责视图控制，它只是控制生命周期和处理事件，真正控制视图的是Window。一个Activity包含了一个Window">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1202660-9ebba23ce8392073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Coder的自由空间" type="application/atom+xml">
   
@@ -127,9 +141,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-初探Android的DecorView与Window" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-初探Android的DecorView与Window" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -203,58 +215,37 @@ mContentRoot = (ViewGroup) root;//mContentRoot就是mContentParent视图
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-观察者模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/18/观察者模式/">设计模式之观察者模式</a>
-    </h1>
   
+    <a href="/2016/11/18/观察者模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之观察者模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Created-by-王晨-on-16-11-18"><a href="#Created-by-王晨-on-16-11-18" class="headerlink" title="Created by 王晨 on 16/11/18."></a>Created by 王晨 on 16/11/18.</h1><blockquote>
-<p>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个对象。这个对象在状态上发生变化时，会通知所有观察者对象，让它们能够自动更新自己。最常见的例如邮件，当github或者之类的网站出现新的月报，就会像所有注册的用户发送邮件，所有用户就是观察者（也叫订阅者）,github新报就是被观察者，一旦新报更新，就会自动向所有观察者发送邮件#<br>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/18/观察者模式/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/18/观察者模式/" class="archive-article-date">
-  	<time datetime="2016-11-18T13:09:39.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-18</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-设计模式/">Java,设计模式</a></li></ul>
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
@@ -262,111 +253,6 @@ mContentRoot = (ViewGroup) root;//mContentRoot就是mContentParent视图
 
 
 
-
-
-
-  
-    <article id="post-C++指针问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/16/C++指针问题/">C++指针问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Created-by-王晨-on-16-6-20"><a href="#Created-by-王晨-on-16-6-20" class="headerlink" title="Created by 王晨 on 16/6/20."></a>Created by 王晨 on 16/6/20.</h1><blockquote>
-<p>说明，此代码由浅入深，同时可能解说思想有所不同，让人觉得怪异，但是个人认为这种思想有助于理解C，C++实质性的东西。下面基本涵盖了C语言和C++的简单指针部分，同时也简单介绍了C++特有的引用。<br>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/16/C++指针问题/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/16/C++指针问题/" class="archive-article-date">
-  	<time datetime="2016-11-16T15:24:39.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-16</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-First" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/16/First/">First Night</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>我有一头<strong>小毛驴</strong>，可是我从来都不骑。</p>
-</blockquote>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/16/First/" class="archive-article-date">
-  	<time datetime="2016-11-16T14:46:56.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-16</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-  
 
 
       </div>
@@ -388,8 +274,8 @@ mContentRoot = (ViewGroup) root;//mContentRoot就是mContentParent视图
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
